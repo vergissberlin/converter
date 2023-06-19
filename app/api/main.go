@@ -3,10 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/joho/godotenv"
+	"github.com/spf13/viper"
 )
 
 // Example Protobuf structure
@@ -16,15 +15,15 @@ type Person struct {
 }
 
 func main() {
-	// Load environment variables
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+
+	// Use viper to read environment variables
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
+	viper.AutomaticEnv()
 
 	http.HandleFunc("/json2protobuff", convertJSON2ProtobuffHandler)
 
-	port := os.Getenv("PORT") // Heroku provides the port to bind to
+	port := viper.GetString("PORT") // Heroku provides the port to bind to
 	log.Println("Server started on http://0.0.0.0:" + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

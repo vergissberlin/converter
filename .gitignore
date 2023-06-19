@@ -1,9 +1,9 @@
 /*
 
-!/.env
 !/app
 !/tests
 
+!/.env
 !/.gitignore
 !/Dockerfile
 !/go.mod
