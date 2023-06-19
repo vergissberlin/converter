@@ -3,8 +3,10 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/joho/godotenv"
 )
 
 // Example Protobuf structure
@@ -14,9 +16,20 @@ type Person struct {
 }
 
 func main() {
+	// Load environment variables
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	http.HandleFunc("/json2protobuff", convertJSON2ProtobuffHandler)
-	log.Println("Server started on http://0.0.0.0:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+
+	port := os.Getenv("PORT") // Heroku provides the port to bind to
+	if port == "" {
+		port = "8080"
+	}
+	log.Println("Server started on http://0.0.0.0:" + port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func (p *Person) ProtoMessage()  {}

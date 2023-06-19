@@ -24,4 +24,32 @@ This simple mirco service is used to convert data formats.
 
 ## 📝 Notes
 
-The server started simply returns a `message: "Hello, Railway!"` payload in JSON. The server code is located in `main.go`.
+Send a request to the service with the following format:
+
+```bash
+curl --location 'http://YOURDOMAIN.railway.com/json2protobuff' \ # replace with your railway url
+--header 'Content-Type: application/json' \
+--data './tests/fixtures/person.json'
+```
+
+## 🛠️ Development
+
+### Run the service
+
+```bash
+docker build -t gonverter .
+docker run -d -p 8080:8080 gonverter
+```
+
+### Send a request
+
+```bash
+curl --location 'http://0.0.0.0:8080/json2protobuff' \
+--header 'Content-Type: application/json' \
+--data './tests/fixtures/person.json'
+```
+
+#### Response
+
+`Content-Type: application/octet-stream`
+`Body: test test@example.com`
