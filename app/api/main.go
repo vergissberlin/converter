@@ -25,9 +25,6 @@ func main() {
 	http.HandleFunc("/json2protobuff", convertJSON2ProtobuffHandler)
 
 	port := os.Getenv("PORT") // Heroku provides the port to bind to
-	if port == "" {
-		port = "8080"
-	}
 	log.Println("Server started on http://0.0.0.0:" + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
