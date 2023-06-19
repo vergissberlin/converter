@@ -1,7 +1,10 @@
-// +heroku goVersion 1.16
+module thinkport/gonverter
 
-module fiber
+go 1.20
 
-go 1.16
+require github.com/golang/protobuf v1.5.3
 
-require github.com/gofiber/fiber/v2 v2.42.0
+require (
+	github.com/pkg/errors v0.9.1 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
+)
