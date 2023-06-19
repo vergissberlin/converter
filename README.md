@@ -11,8 +11,6 @@ tags:
 
 This simple mirco service is used to convert data formats.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/7di0JR)
-
 ## ✨ Features
 
 * json to protobuf
@@ -54,3 +52,7 @@ curl --location 'http://0.0.0.0:8080/json2protobuf' \
  `Content-Type: application/octet-stream`
 
  `Body: test test@example.com`
+
+## Know how
+
+* Read <https://seb-nyberg.medium.com/customizing-protobuf-json-serialization-in-golang-6c58b5890356>
