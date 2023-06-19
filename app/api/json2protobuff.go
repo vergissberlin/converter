@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"net/http"
 
@@ -16,29 +15,8 @@ func convertJSON2ProtobuffHandler(w http.ResponseWriter, r *http.Request) {
 		// Set the response status code to 405 (Method Not Allowed)
 		w.WriteHeader(http.StatusMethodNotAllowed)
 
-		// Set the content type header to indicate that we are returning JSON data
-		w.Header().Set("Content-Type", "application/json")
-
-		// Error response as JSON
-		json.NewEncoder(w).Encode(map[string]string{
-			"error": "Only POST requests are allowed",
-		})
-
-		return
-	}
-
-	// Check if the content type is JSON
-	if r.Header.Get("Content-Type") != "application/json" {
-		// Set the response status code to 415 (Unsupported Media Type)
-		w.WriteHeader(http.StatusUnsupportedMediaType)
-
-		// Set the content type header to indicate that we are returning JSON data
-		w.Header().Set("Content-Type", "application/json")
-
-		// Error response as JSON
-		json.NewEncoder(w).Encode(map[string]string{
-			"error": "Request body must be in JSON format",
-		})
+		// Set the response body to "Only POST requests are allowed"
+		http.Error(w, "Only POST requests are allowed", http.StatusBadRequest)
 
 		return
 	}
